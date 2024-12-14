@@ -1,0 +1,46 @@
+host: bb597534e5c4
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 96
+Rules claiming more threads will be scaled down.
+Provided resources: gpu=2
+Job stats:
+job             count
+------------  -------
+all                 1
+run_modeller        1
+total               2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Dec 14 11:41:39 2024]
+localrule run_modeller:
+    input: input/P09038.fasta
+    output: modeller/P09038.fasta_processed.success
+    jobid: 1
+    reason: Missing output files: modeller/P09038.fasta_processed.success
+    wildcards: SAMPLE_NAME=P09038
+    resources: tmpdir=/tmp, gpu=2
+
+[Sat Dec 14 11:41:39 2024]
+Error in rule run_modeller:
+    jobid: 1
+    input: input/P09038.fasta
+    output: modeller/P09038.fasta_processed.success
+    shell:
+        
+        echo Initiating modeller for input/P09038.fasta"
+        mv input/P09038.fasta ./modeller
+        cd modeller
+        bash run.sh P09038.fasta
+        # Create the output directory and move result folders
+        echo "Pipeline completed and results moved to workspace/modeller_output"
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-12-14T114139.222680.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

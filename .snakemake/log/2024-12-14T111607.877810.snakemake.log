@@ -1,0 +1,38 @@
+host: bb597534e5c4
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 96
+Rules claiming more threads will be scaled down.
+Provided resources: gpu=2
+Job stats:
+job             count
+------------  -------
+all                 1
+run_modeller        1
+total               2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Dec 14 11:16:07 2024]
+localrule run_modeller:
+    input: colab_fold_output/P09038/log.txt, input/P09038.fasta
+    output: modeller/P09038.fasta_processed.success
+    jobid: 1
+    reason: Missing output files: modeller/P09038.fasta_processed.success
+    wildcards: SAMPLE_NAME=P09038
+    resources: tmpdir=/tmp, gpu=2
+
+RuleException in rule run_modeller in file /workspace/Snakefile, line 58:
+IndexError: tuple index out of range, when formatting the following:
+
+        echo "{input[0]} generated. Initiating modeller for {input[1]}"
+        mv {input[1]} ./modeller
+        cd modeller
+        bash run.sh {input.fasta}
+        # Create the output directory and move result folders
+        mkdir -p ../modeller_output
+        find . -maxdepth 1 -type d -not -path "." -exec mv {} ../modeller_output/ \;
+
+        echo "Pipeline completed and results moved to workspace/modeller_output"
+        

@@ -1,0 +1,42 @@
+host: bb597534e5c4
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 96
+Rules claiming more threads will be scaled down.
+Provided resources: gpu=2
+Job stats:
+job             count
+------------  -------
+all                 1
+run_modeller        1
+total               2
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Dec 14 11:43:15 2024]
+localrule run_modeller:
+    input: input/P09038.fasta
+    output: modeller/P09038.fasta_processed.success
+    jobid: 1
+    reason: Missing output files: modeller/P09038.fasta_processed.success
+    wildcards: SAMPLE_NAME=P09038
+    resources: tmpdir=/tmp, gpu=2
+
+[Sat Dec 14 11:45:12 2024]
+Finished job 1.
+1 of 2 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Dec 14 11:45:12 2024]
+localrule all:
+    input: modeller/P09038.fasta_processed.success
+    jobid: 0
+    reason: Input files updated by another job: modeller/P09038.fasta_processed.success
+    resources: tmpdir=/tmp
+
+[Sat Dec 14 11:45:12 2024]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: .snakemake/log/2024-12-14T114315.742060.snakemake.log

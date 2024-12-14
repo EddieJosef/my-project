@@ -1,0 +1,8 @@
+host: bb597534e5c4
+Building DAG of jobs...
+MissingInputException in rule run_alphafold_prediction in file /workspace/Snakefile, line 34:
+Missing input files for rule run_alphafold_prediction:
+    output: colab_fold_output/input/P09038/log.txt
+    wildcards: SAMPLE_NAME=input/P09038
+    affected files:
+        input/input/P09038.fasta

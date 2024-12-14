@@ -1,0 +1,43 @@
+host: bb597534e5c4
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 96
+Rules claiming more threads will be scaled down.
+Provided resources: gpu=2
+Job stats:
+job                         count
+------------------------  -------
+all                             1
+run_alphafold_prediction        1
+run_modeller                    1
+total                           3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Dec 14 11:38:13 2024]
+localrule run_alphafold_prediction:
+    input: input/P09038.fasta, localcolabfold/colabfold-conda/bin/colabfold_batch
+    output: colab_fold_output/P09038/log.txt
+    jobid: 2
+    reason: Updated input files: input/P09038.fasta
+    wildcards: SAMPLE_NAME=P09038
+    resources: tmpdir=/tmp, gpu=2
+
+Terminating processes on user request, this might take some time.
+[Sat Dec 14 11:38:50 2024]
+Error in rule run_alphafold_prediction:
+    jobid: 2
+    input: input/P09038.fasta, localcolabfold/colabfold-conda/bin/colabfold_batch
+    output: colab_fold_output/P09038/log.txt
+    shell:
+        
+        export PATH="/workspace/localcolabfold/colabfold-conda/bin:$PATH"
+        mkdir -p colab_fold_output/P09038  # Create a directory for each sample
+        colabfold_batch          --num-recycle 3          --num-ensemble 2          --amber          --pair-mode paired          --stop-at-score 95          --msa-mode mmseqs2_uniref_env          --templates          input/P09038.fasta ./colab_fold_output/P09038
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Complete log: .snakemake/log/2024-12-14T113813.396266.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

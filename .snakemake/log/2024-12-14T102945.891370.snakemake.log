@@ -1,0 +1,68 @@
+host: bb597534e5c4
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 96
+Rules claiming more threads will be scaled down.
+Provided resources: gpu=2
+Job stats:
+job                         count
+------------------------  -------
+all                             1
+install_colabfold               1
+run_alphafold_prediction        1
+run_modeller                    1
+total                           4
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Dec 14 10:29:45 2024]
+localrule install_colabfold:
+    output: localcolabfold/colabfold-conda/bin/colabfold_batch
+    jobid: 3
+    reason: Missing output files: localcolabfold/colabfold-conda/bin/colabfold_batch
+    resources: tmpdir=/tmp
+
+[Sat Dec 14 10:54:20 2024]
+Finished job 3.
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Dec 14 10:54:20 2024]
+localrule run_alphafold_prediction:
+    input: input/P09038.fasta, localcolabfold/colabfold-conda/bin/colabfold_batch
+    output: colab_fold_output/P09038/log.txt
+    jobid: 2
+    reason: Missing output files: colab_fold_output/P09038/log.txt; Input files updated by another job: localcolabfold/colabfold-conda/bin/colabfold_batch
+    wildcards: SAMPLE_NAME=P09038
+    resources: tmpdir=/tmp, gpu=2
+
+[Sat Dec 14 11:09:11 2024]
+Finished job 2.
+2 of 4 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Dec 14 11:09:11 2024]
+localrule run_modeller:
+    input: colab_fold_output/P09038/log.txt, input/P09038.fasta
+    output: modeller/P09038.fasta_processed.success
+    jobid: 1
+    reason: Missing output files: modeller/P09038.fasta_processed.success; Input files updated by another job: colab_fold_output/P09038/log.txt
+    wildcards: SAMPLE_NAME=P09038
+    resources: tmpdir=/tmp, gpu=2
+
+RuleException in rule run_modeller in file /workspace/Snakefile, line 58:
+IndexError: tuple index out of range, when formatting the following:
+
+        echo "{input.log} generated. Initiating modeller for {input.fasta}"
+        mv {input.fasta} ./modeller
+        cd modeller
+        bash run.sh {input.fasta}
+        # Create the output directory and move result folders
+        mkdir -p ../workspace/modeller_output
+        find . -maxdepth 1 -type d -not -path "." -not -path "./workspace" -exec mv {} ../workspace/modeller_output/ \;
+
+        echo "Pipeline completed and results moved to workspace/modeller_output"
+        
