@@ -15,7 +15,7 @@ COPY . /workspace/
 RUN ls -l /workspace
 
 # Set Modeller license key as an environment variable
-ENV KEY_MODELLER="MODELIRANJE"
+ENV KEY_MODELLER="xxxxxxxxxxx"
 
 # Create the Conda environment from the YAML file
 RUN conda env create -f ./snake_env.yml
